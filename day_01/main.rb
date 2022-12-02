@@ -18,6 +18,7 @@ if __FILE__ == $0
     end
 
     # Print out the maximum of the number grouping sums
+    puts "Solution:"
     puts number_grouping_sums.max
 
 end
