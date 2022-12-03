@@ -52,7 +52,7 @@ def get_win_score
 end
 
 
-# Get the score for my choice (according to Part One's rules)
+# Get the score for my choice (according to Part 1's rules)
 def get_choice_score_part_one(choice)
     case choice
     when "X" # Rock
@@ -65,7 +65,7 @@ def get_choice_score_part_one(choice)
 end
 
 
-# Get the outcome score of the round (according to Part One's rules)
+# Get the outcome score of the round (according to Part 1's rules)
 def get_outcome_score_part_one(round_tuple)
     case round_tuple[0] # Opponent's choice
     when "A" # Rock
@@ -99,13 +99,13 @@ def get_outcome_score_part_one(round_tuple)
 end
 
 
-# Get the score for the round (according to Part One's rules)
+# Get the score for the round (according to Part 1's rules)
 def get_round_score_part_one(round_tuple)
     return get_choice_score_part_one(round_tuple[1]) + get_outcome_score_part_one(round_tuple)
 end
 
 
-# Get the total score of the game (according to Part One's rules)
+# Get the total score of the game (according to Part 1's rules)
 def get_total_score_part_one(parsed_input)
     total_score = 0
     parsed_input.each do |round_tuple|
@@ -115,7 +115,7 @@ def get_total_score_part_one(parsed_input)
 end
 
 
-# Get the score for my choice (according to Part Two's rules)
+# Get the score for my choice (according to Part 2's rules)
 def get_choice_score_part_two(round_tuple)
     case round_tuple[0] # Opponent's choice
     when "A" # Rock
@@ -149,7 +149,7 @@ def get_choice_score_part_two(round_tuple)
 end
 
 
-# Get the outcome score of the round (according to Part Two's rules)
+# Get the outcome score of the round (according to Part 2's rules)
 def get_outcome_score_part_two(outcome)
     case outcome
     when "X" # Loss
@@ -162,13 +162,13 @@ def get_outcome_score_part_two(outcome)
 end
 
 
-# Get the score for the round (according to Part Two's rules)
+# Get the score for the round (according to Part 2's rules)
 def get_round_score_part_two(round_tuple)
     return get_choice_score_part_two(round_tuple) + get_outcome_score_part_two(round_tuple[1])
 end
 
 
-# Get the total score of the game (according to Part Two's rules)
+# Get the total score of the game (according to Part 2's rules)
 def get_total_score_part_two(parsed_input)
     total_score = 0
     parsed_input.each do |round_tuple|
@@ -180,13 +180,16 @@ end
 
 # Do ALL the things!
 if __FILE__ == $0
+    puts "### Advent of Code 2022, Day 02 ###"
+    puts "\n"
+
     parsed_input = get_parsed_input()
 
-    puts "### Part One Solution ###"
+    puts "### Part 1 Solution ###"
     puts get_total_score_part_one(parsed_input)
 
     puts "\n"
 
-    puts "### Part Two Solution ###"
+    puts "### Part 2 Solution ###"
     puts get_total_score_part_two(parsed_input)
 end

@@ -53,17 +53,19 @@ end
 
 # Do ALL the things!
 if __FILE__ == $0
+    puts "### Advent of Code 2022, Day 01 ###"
+    puts "\n"
 
     # Get the sums of each number grouping
     number_grouping_sums = get_number_grouping_sums()
 
     # Print the max of those sums
-    puts "### Part One Solution ###"
+    puts "### Part 1 Solution ###"
     puts number_grouping_sums.max
 
     puts "\n"
 
     # Print the sum of the highest three of those sums
-    puts "### Part Two Solution ###"
+    puts "### Part 2 Solution ###"
     puts get_highest_values(number_grouping_sums, 3).sum
 end
