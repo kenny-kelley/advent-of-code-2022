@@ -78,7 +78,7 @@ def get_total_score_part_one(parsed_input)
 end
 
 
-# Main method
+# Do ALL the things!
 if __FILE__ == $0
     parsed_input = get_parsed_input()
 
