@@ -28,8 +28,8 @@ def get_choice_score(choice)
 end
 
 
-# Naive implementation to get the comparison score of the round
-def get_comparison_score(round_tuple)
+# Naive implementation to get the comparison score of the round (according to Part One's rules)
+def get_comparison_score_part_one(round_tuple)
     case round_tuple[0] # Opponent's choice
     when "A" # Rock
         case round_tuple[1] # My choice
@@ -62,17 +62,17 @@ def get_comparison_score(round_tuple)
 end
 
 
-# Get the score for the round
-def get_round_score(round_tuple)
-    return get_choice_score(round_tuple[1]) + get_comparison_score(round_tuple)
+# Get the score for the round (according to Part One's rules)
+def get_round_score_part_one(round_tuple)
+    return get_choice_score(round_tuple[1]) + get_comparison_score_part_one(round_tuple)
 end
 
 
-# Get the total score of the game
-def get_total_score(parsed_input)
+# Get the total score of the game (according to Part One's rules)
+def get_total_score_part_one(parsed_input)
     total_score = 0
     parsed_input.each do |round_tuple|
-        total_score += get_round_score(round_tuple)
+        total_score += get_round_score_part_one(round_tuple)
     end
     return total_score
 end
@@ -83,5 +83,10 @@ if __FILE__ == $0
     parsed_input = get_parsed_input()
 
     puts "### Part One Solution ###"
-    puts get_total_score(parsed_input)
+    puts get_total_score_part_one(parsed_input)
+
+    puts "\n"
+
+    puts "### Part Two Solution ###"
+    puts "TODO"
 end
