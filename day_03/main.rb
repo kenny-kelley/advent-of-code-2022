@@ -44,6 +44,23 @@ def get_duplicate_item_priority_values_sum(parsed_input)
 end
 
 
+# Get the common "item" in the group's "rucksacks" (we're assuming {group} is an array of length 3)
+def get_common_item(group)
+    return (group[0].split("") & group[1].split("") & group[2].split("")).join
+end
+
+
+# Get the sum of the priority of each "item" that is found in every "rucksack" for each group of 3
+#   "rucksacks"
+def get_common_item_priority_values_sum(parsed_input)
+    common_item_priority_values_sum = 0
+    (0...parsed_input.size).step(3).each do |i|
+        common_item_priority_values_sum += get_item_priority_value(get_common_item(parsed_input[i, 3]))
+    end
+    return common_item_priority_values_sum
+end
+
+
 # Do ALL the things!
 if __FILE__ == $0
     puts "### Advent of Code 2022, Day 03 ###"
@@ -57,5 +74,5 @@ if __FILE__ == $0
     puts "\n"
 
     puts "### Part 2 Solution ###"
-    puts "TODO"
+    puts get_common_item_priority_values_sum(parsed_input)
 end
