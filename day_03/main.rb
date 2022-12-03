@@ -9,27 +9,21 @@
 POSSIBLE_ITEMS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
-# Get the first and second half of a string as a tuple
-def get_string_halves(string)
-    return [string[0, string.size / 2], string[string.size / 2, string.size - 1]]
+# Get the input parsed into an array of length N where N is the number "rucksacks"
+def get_parsed_input()
+    lines = File.read("#{__dir__}/input.txt").split("\n")
 end
 
 
-# Get the input parsed into an Nx2 matrix where N is the number "rucksacks" and 2 is the number of
-#   "compartments" in each "rucksack"
-def get_parsed_input()
-    lines = File.read("#{__dir__}/input.txt").split("\n")
-    parsed_input = []
-    lines.each do |line|
-        parsed_input.append(get_string_halves(line))
-    end
-    return parsed_input
+# Get the two "compartments" of a "rucksack" (in other words, split the string in half)
+def get_compartments(rucksack)
+    return [rucksack[0, rucksack.size / 2], rucksack[rucksack.size / 2, rucksack.size - 1]]
 end
 
 
 # Get the "item" found in both "compartments" of the "rucksack"
-def get_duplicate_item(rucksack)
-    return (rucksack[0].split("") & rucksack[1].split("")).join
+def get_duplicate_item(compartments)
+    return (compartments[0].split("") & compartments[1].split("")).join
 end
 
 
@@ -44,7 +38,7 @@ end
 def get_duplicate_item_priority_values_sum(parsed_input)
     duplicate_item_priority_values_sum = 0
     parsed_input.each do |rucksack|
-        duplicate_item_priority_values_sum += get_item_priority_value(get_duplicate_item(rucksack))
+        duplicate_item_priority_values_sum += get_item_priority_value(get_duplicate_item(get_compartments(rucksack)))
     end
     return duplicate_item_priority_values_sum
 end
