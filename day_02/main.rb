@@ -15,48 +15,84 @@ def get_parsed_input()
 end
 
 
-# Get the score for your choice
-def get_choice_score(choice)
+# Get the score corresponding to choosing Rock
+def get_rock_score
+    return 1
+end
+
+
+# Get the score corresponding to choosing Paper
+def get_paper_score
+    return 2
+end
+
+
+# Get the score corresponding to choosing Scissors
+def get_scissors_score
+    return 3
+end
+
+
+# Get the score corresponding to a Loss
+def get_loss_score
+    return 0
+end
+
+
+# Get the score corresponding to a Draw
+def get_draw_score
+    return 3
+end
+
+
+# Get the score corresponding to a Win
+def get_win_score
+    return 6
+end
+
+
+# Get the score for my choice (according to Part One's rules)
+def get_choice_score_part_one(choice)
     case choice
     when "X" # Rock
-        return 1
+        return get_rock_score
     when "Y" # Paper
-        return 2
+        return get_paper_score
     when "Z" # Scissors
-        return 3
+        return get_scissors_score
     end
 end
 
 
-# Naive implementation to get the comparison score of the round (according to Part One's rules)
-def get_comparison_score_part_one(round_tuple)
+# Get the outcome score of the round (according to Part One's rules)
+def get_outcome_score_part_one(round_tuple)
     case round_tuple[0] # Opponent's choice
     when "A" # Rock
         case round_tuple[1] # My choice
         when "X" # Rock
-            return 3
+            return get_draw_score
         when "Y" # Paper
-            return 6
+            return get_win_score
         when "Z" # Scissors
-            return 0
+            return get_loss_score
         end
     when "B" # Paper
         case round_tuple[1] # My choice
         when "X" # Rock
-            return 0
+            return get_loss_score
         when "Y" # Paper
-            return 3
+            return get_draw_score
         when "Z" # Scissors
-            return 6
+            return get_win_score
         end
     when "C" # Scissors
         case round_tuple[1] # My choice
         when "X" # Rock
-            return 6
+            return get_win_score
         when "Y" # Paper
-            return 0
+            return get_loss_score
         when "Z" # Scissors
-            return 3
+            return get_draw_score
         end
     end
 end
@@ -64,7 +100,7 @@ end
 
 # Get the score for the round (according to Part One's rules)
 def get_round_score_part_one(round_tuple)
-    return get_choice_score(round_tuple[1]) + get_comparison_score_part_one(round_tuple)
+    return get_choice_score_part_one(round_tuple[1]) + get_outcome_score_part_one(round_tuple)
 end
 
 
@@ -73,6 +109,69 @@ def get_total_score_part_one(parsed_input)
     total_score = 0
     parsed_input.each do |round_tuple|
         total_score += get_round_score_part_one(round_tuple)
+    end
+    return total_score
+end
+
+
+# Get the score for my choice (according to Part Two's rules)
+def get_choice_score_part_two(round_tuple)
+    case round_tuple[0] # Opponent's choice
+    when "A" # Rock
+        case round_tuple[1] # Round outcome
+        when "X" # Loss
+            return get_scissors_score
+        when "Y" # Draw
+            return get_rock_score
+        when "Z" # Win
+            return get_paper_score
+        end
+    when "B" # Paper
+        case round_tuple[1] # Round outcome
+        when "X" # Loss
+            return get_rock_score
+        when "Y" # Draw
+            return get_paper_score
+        when "Z" # Win
+            return get_scissors_score
+        end
+    when "C" # Scissors
+        case round_tuple[1] # Round outcome
+        when "X" # Loss
+            return get_paper_score
+        when "Y" # Draw
+            return get_scissors_score
+        when "Z" # Win
+            return get_rock_score
+        end
+    end
+end
+
+
+# Get the outcome score of the round (according to Part Two's rules)
+def get_outcome_score_part_two(outcome)
+    case outcome
+    when "X" # Loss
+        return get_loss_score
+    when "Y" # Draw
+        return get_draw_score
+    when "Z" # Win
+        return get_win_score
+    end
+end
+
+
+# Get the score for the round (according to Part Two's rules)
+def get_round_score_part_two(round_tuple)
+    return get_choice_score_part_two(round_tuple) + get_outcome_score_part_two(round_tuple[1])
+end
+
+
+# Get the total score of the game (according to Part Two's rules)
+def get_total_score_part_two(parsed_input)
+    total_score = 0
+    parsed_input.each do |round_tuple|
+        total_score += get_round_score_part_two(round_tuple)
     end
     return total_score
 end
@@ -88,5 +187,5 @@ if __FILE__ == $0
     puts "\n"
 
     puts "### Part Two Solution ###"
-    puts "TODO"
+    puts get_total_score_part_two(parsed_input)
 end
