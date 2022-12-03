@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+# Advent of Code 2022, Day 01
+# Author: Kenny Kelley
+# Date: 2022-12-01
+
+
 # Returns an array of the sums of each number grouping in input.txt
 def get_number_grouping_sums()
 
@@ -19,6 +24,7 @@ def get_number_grouping_sums()
 
     return number_grouping_sums
 end
+
 
 # Returns an array of the {x} highest values in an array of integers
 def get_highest_values(values, x)
@@ -44,6 +50,8 @@ def get_highest_values(values, x)
     return highest_values
 end
 
+
+# Do ALL the things!
 if __FILE__ == $0
 
     # Get the sums of each number grouping

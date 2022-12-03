@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+# Advent of Code 2022, Day 02
 # Author: Kenny Kelley
 # Date: 2022-12-02
 
