@@ -11,7 +11,7 @@ POSSIBLE_ITEMS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 # Get the input parsed into an array of length N where N is the number "rucksacks"
 def get_parsed_input()
-    lines = File.read("#{__dir__}/input.txt").split("\n")
+    return File.read("#{__dir__}/input.txt").split("\n")
 end
 
 
