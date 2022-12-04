@@ -15,7 +15,7 @@ I'm guessing these scripts will work on most Ruby interpreters. Although the fil
 To learn how to install Ruby on your platform, go here: https://www.ruby-lang.org/en/documentation/installation/
 
 ## Running the solutions
-You can run each day's solution directly with each `main.rb` script. For example:
+You can run each day's solutions directly with each `main.rb` script. For example:
 ```bash
 ./day_01/main.rb
 ```
