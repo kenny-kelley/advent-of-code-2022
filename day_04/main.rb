@@ -57,6 +57,24 @@ def get_part_one_solution(lines)
 end
 
 
+# Returns whether or not the ranges overlap
+def do_ranges_overlap(ranges)
+    return ranges[0][1] >= ranges[1][0] && ranges[0][0] <= ranges[1][1]
+end
+
+
+# Count the number of assignment pairs where the ranges overlap
+def get_part_two_solution(lines)
+    count = 0
+    lines.each do |raw_pair|
+        if do_ranges_overlap(get_ranges(get_pair(raw_pair)))
+            count += 1
+        end
+    end
+    return count
+end
+
+
 # Do it
 if __FILE__ == $0
     puts "### Advent of Code 2022, Day 04 ###"
@@ -70,5 +88,5 @@ if __FILE__ == $0
     puts "\n"
 
     puts "### Part 2 Solution ###"
-    puts "TODO"
+    puts get_part_two_solution(lines)
 end
