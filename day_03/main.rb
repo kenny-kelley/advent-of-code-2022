@@ -34,7 +34,7 @@ end
 
 
 # Get the sum of the priority of each "item" that is found in both "compartments" of each
-#   "rucksack"
+#   "rucksack" (this is the solution to Part 1)
 def get_duplicate_item_priority_values_sum(parsed_input)
     duplicate_item_priority_values_sum = 0
     parsed_input.each do |rucksack|
@@ -51,7 +51,7 @@ end
 
 
 # Get the sum of the priority of each "item" that is found in every "rucksack" for each group of 3
-#   "rucksacks"
+#   "rucksacks" (this the solution to Part 2)
 def get_common_item_priority_values_sum(parsed_input)
     common_item_priority_values_sum = 0
     (0...parsed_input.size).step(3).each do |i|
