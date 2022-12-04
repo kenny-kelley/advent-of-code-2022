@@ -5,31 +5,18 @@
 # Date: 2022-12-04
 
 
-# Get the input parsed into an array of length N where N is the number pairs
-def get_lines
-    return File.read("#{__dir__}/input.txt").split("\n")
-end
-
-
-# Split the raw pair string
-def get_pair(raw_pair)
-    return raw_pair.split(",")
-end
-
-
-# Split the raw range string and convert them to integers
-def get_range(raw_range)
-    return raw_range.split("-").map(&:to_i)
-end
-
-
-# Get the ranges for a given pair
-def get_ranges(pair)
-    ranges = []
-    pair.each do |raw_range|
-        ranges.append(get_range(raw_range))
+# Gets the assignments as an Nx2x2 matrix where N is the number of assignment pairs, there are 2
+#   assignments in a pair, and there are 2 integers defining an individual assignment's range
+def get_assignments
+    assignments = []
+    File.read("#{__dir__}/input.txt").split("\n").each do |raw_assignment_pair|
+        assignment_pair_ranges = []
+        raw_assignment_pair.split(",").each do |raw_range|
+            assignment_pair_ranges.append(raw_range.split("-").map(&:to_i))
+        end
+        assignments.append(assignment_pair_ranges)
     end
-    return ranges
+    return assignments
 end
 
 
@@ -46,10 +33,10 @@ end
 
 
 # Count the number of assignment pairs where the ranges are fully contained in each other
-def get_part_one_solution(lines)
+def get_part_one_solution(assignments)
     count = 0
-    lines.each do |raw_pair|
-        if are_ranges_fully_contained_in_each_other(get_ranges(get_pair(raw_pair)))
+    assignments.each do |ranges|
+        if are_ranges_fully_contained_in_each_other(ranges)
             count += 1
         end
     end
@@ -64,10 +51,10 @@ end
 
 
 # Count the number of assignment pairs where the ranges overlap
-def get_part_two_solution(lines)
+def get_part_two_solution(assigments)
     count = 0
-    lines.each do |raw_pair|
-        if do_ranges_overlap(get_ranges(get_pair(raw_pair)))
+    assigments.each do |ranges|
+        if do_ranges_overlap(ranges)
             count += 1
         end
     end
@@ -80,13 +67,13 @@ if __FILE__ == $0
     puts "### Advent of Code 2022, Day 04 ###"
     puts "\n"
 
-    lines = get_lines
+    assignments = get_assignments
 
     puts "### Part 1 Solution ###"
-    puts get_part_one_solution(lines)
+    puts get_part_one_solution(assignments)
 
     puts "\n"
 
     puts "### Part 2 Solution ###"
-    puts get_part_two_solution(lines)
+    puts get_part_two_solution(assignments)
 end
