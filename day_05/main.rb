@@ -88,8 +88,19 @@ def get_puzzle_input
 end
 
 
+# Returns a string where each character is the crate on the top of each stack
+def get_string_representing_the_top_crates(stacks)
+    solution = ""
+    stacks.each do |stack|
+        solution += stack[stack.length - 1]
+    end
+    return solution
+end
+
+
 # Performs the rearrangment procedure on the {stacks} according to the {rearrangement_steps}
-def perform_rearrangement_procedure(stacks, rearrangement_steps)
+#   (according to the rules of Part 1)
+def perform__part_one_rearrangement_procedure(stacks, rearrangement_steps)
     stacks_copy = Marshal.load(Marshal.dump(stacks))
     rearrangement_steps.each do |rearrangement_step|
         i = 0
@@ -102,13 +113,9 @@ def perform_rearrangement_procedure(stacks, rearrangement_steps)
 end
 
 
-# Returns a string where each character is the crate on the top of each stack
-def get_part_one_solution(stacks)
-    solution = ""
-    stacks.each do |stack|
-        solution += stack[stack.length - 1]
-    end
-    return solution
+# Returns the solution to Part 1
+def get_part_one_solution(puzzle_input)
+    return get_string_representing_the_top_crates(perform__part_one_rearrangement_procedure(puzzle_input.stacks, puzzle_input.rearrangement_steps))
 end
 
 
@@ -118,10 +125,9 @@ if __FILE__ == $0
     puts "\n"
 
     puzzle_input = get_puzzle_input
-    rearranged_stacks = perform_rearrangement_procedure(puzzle_input.stacks, puzzle_input.rearrangement_steps)
 
     puts "### Part 1 Solution ###"
-    puts get_part_one_solution(rearranged_stacks)
+    puts get_part_one_solution(puzzle_input)
 
     puts "\n"
 
