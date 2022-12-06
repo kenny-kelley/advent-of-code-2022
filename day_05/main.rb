@@ -98,7 +98,7 @@ def get_string_representing_the_top_crates(stacks)
 end
 
 
-# Performs the rearrangment procedure on the {stacks} according to the {rearrangement_steps}
+# Performs the rearrangment procedure on a copy of {stacks} according to the {rearrangement_steps}
 #   (according to the rules of Part 1)
 def perform__part_one_rearrangement_procedure(stacks, rearrangement_steps)
     stacks_copy = Marshal.load(Marshal.dump(stacks))
@@ -119,6 +119,37 @@ def get_part_one_solution(puzzle_input)
 end
 
 
+# Return the index at which we should be using `take` and `drop` from (this is for Part 2)
+def get_movement_index(number_to_move, source_stack_length)
+    if number_to_move < source_stack_length
+        return source_stack_length - number_to_move
+    else
+        return 0
+    end
+end
+
+
+# Performs the rearrangment procedure on a copy of {stacks} according to the {rearrangement_steps}
+#   (according to the rules of Part 2)
+def perform__part_two_rearrangement_procedure(stacks, rearrangement_steps)
+    stacks_copy = Marshal.load(Marshal.dump(stacks))
+    rearrangement_steps.each do |rearrangement_step|
+        source_stack = stacks_copy[rearrangement_step.source_stack]
+        destination_stack = stacks_copy[rearrangement_step.destination_stack]
+        movement_index = get_movement_index(rearrangement_step.number_to_move, source_stack.length)
+        stacks_copy[rearrangement_step.destination_stack] = destination_stack.concat(source_stack.drop(movement_index))
+        stacks_copy[rearrangement_step.source_stack] = source_stack.take(movement_index)
+    end
+    return stacks_copy
+end
+
+
+# Returns the solution to Part 2
+def get_part_two_solution(puzzle_input)
+    return get_string_representing_the_top_crates(perform__part_two_rearrangement_procedure(puzzle_input.stacks, puzzle_input.rearrangement_steps))
+end
+
+
 # Do the thing
 if __FILE__ == $0
     puts "### Advent of Code 2022, Day 05 ###"
@@ -132,5 +163,5 @@ if __FILE__ == $0
     puts "\n"
 
     puts "### Part 2 Solution ###"
-    puts "TODO"
+    puts get_part_two_solution(puzzle_input)
 end
