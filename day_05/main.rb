@@ -11,16 +11,21 @@ class PuzzleInput
         @stacks = stacks
         @rearrangement_steps = rearrangement_steps
     end
+    attr_reader :stacks
+    attr_reader :rearrangement_steps
 end
 
 
 # A class representing a single rearrangement step in the overall procedure
 class RearrangementStep
     def initialize(number_to_move, source_stack, destination_stack)
-        @number_to_move = number_to_move
-        @source_stack = source_stack
-        @destination_stack = destination_stack
+        @number_to_move = number_to_move.to_i
+        @source_stack = source_stack.to_i - 1
+        @destination_stack = destination_stack.to_i - 1
     end
+    attr_reader :number_to_move
+    attr_reader :source_stack
+    attr_reader :destination_stack
 end
 
 
@@ -83,15 +88,40 @@ def get_puzzle_input
 end
 
 
+# Performs the rearrangment procedure on the {stacks} according to the {rearrangement_steps}
+def perform_rearrangement_procedure(stacks, rearrangement_steps)
+    stacks_copy = Marshal.load(Marshal.dump(stacks))
+    rearrangement_steps.each do |rearrangement_step|
+        i = 0
+        while i < rearrangement_step.number_to_move
+            stacks_copy[rearrangement_step.destination_stack].push(stacks_copy[rearrangement_step.source_stack].pop)
+            i += 1
+        end
+    end
+    return stacks_copy
+end
+
+
+# Returns a string where each character is the crate on the top of each stack
+def get_part_one_solution(stacks)
+    solution = ""
+    stacks.each do |stack|
+        solution += stack[stack.length - 1]
+    end
+    return solution
+end
+
+
 # Do the thing
 if __FILE__ == $0
     puts "### Advent of Code 2022, Day 05 ###"
     puts "\n"
 
     puzzle_input = get_puzzle_input
+    rearranged_stacks = perform_rearrangement_procedure(puzzle_input.stacks, puzzle_input.rearrangement_steps)
 
     puts "### Part 1 Solution ###"
-    puts "TODO"
+    puts get_part_one_solution(rearranged_stacks)
 
     puts "\n"
 
