@@ -11,21 +11,34 @@ def get_puzzle_input
 end
 
 
-# Finds the solution to Part 1
-def find_part_one_solution(puzzle_input)
+# Given a {string}, finds the end of the first substring of length {n} + 1 composed entirely of
+#   unique characters
+def find_end_of_substring_with_distinct_characters(string, n)
     most_recent_characters = []
-    (0...puzzle_input.length).each do |i|
-        if most_recent_characters.length < 3
-            most_recent_characters.append(puzzle_input[i])
+    (0...string.length).each do |i|
+        if most_recent_characters.length < n
+            most_recent_characters.append(string[i])
         else
-            if most_recent_characters.include?(puzzle_input[i]) || most_recent_characters.uniq.length != most_recent_characters.length
+            if most_recent_characters.include?(string[i]) || most_recent_characters.uniq.length != most_recent_characters.length
                 most_recent_characters.shift
-                most_recent_characters.append(puzzle_input[i])
+                most_recent_characters.append(string[i])
             else
-                return i + 1
+                return i
             end
         end
     end
+end
+
+
+# Finds the index + 1 of the last character of the start-of-packet marker (the solution to Part 1)
+def find_part_one_solution(puzzle_input)
+    return find_end_of_substring_with_distinct_characters(puzzle_input, 3) + 1
+end
+
+
+# Finds the index + 1 of the last character of the start-of-message marker (the solution to Part 2)
+def find_part_two_solution(puzzle_input)
+    return find_end_of_substring_with_distinct_characters(puzzle_input, 13) + 1
 end
 
 
@@ -42,5 +55,5 @@ if __FILE__ == $0
     puts "\n"
 
     puts "### Part 2 Solution ###"
-    puts "TODO"
+    puts find_part_two_solution(puzzle_input)
 end
