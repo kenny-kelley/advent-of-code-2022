@@ -83,8 +83,7 @@ end
 # Returns a {PuzzleInput} object
 def get_puzzle_input
     raw_puzzle_input = File.read("#{__dir__}/input.txt").split("\n\n")
-    puzzle_input = PuzzleInput.new(get_stacks(raw_puzzle_input[0]), get_rearrangement_steps(raw_puzzle_input[1]))
-    return puzzle_input
+    return PuzzleInput.new(get_stacks(raw_puzzle_input[0]), get_rearrangement_steps(raw_puzzle_input[1]))
 end
 
 
