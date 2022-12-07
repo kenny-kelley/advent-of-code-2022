@@ -5,7 +5,7 @@
 # Date: 2022-12-03
 
 
-for solution in ./day_*/main.rb; do
+for path in ./day_*/main.rb; do
     echo "================================================================================"
-    ${solution}
+    ${path}
 done
