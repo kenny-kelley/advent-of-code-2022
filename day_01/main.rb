@@ -62,10 +62,10 @@ if __FILE__ == $0
     # Print the max of those sums
     puts "### Part 1 Solution ###"
     puts number_grouping_sums.max
-
     puts "\n"
 
     # Print the sum of the highest three of those sums
     puts "### Part 2 Solution ###"
     puts get_highest_values(number_grouping_sums, 3).sum
+    puts "\n"
 end

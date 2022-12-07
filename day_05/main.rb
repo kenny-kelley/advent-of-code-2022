@@ -158,9 +158,9 @@ if __FILE__ == $0
 
     puts "### Part 1 Solution ###"
     puts get_part_one_solution(puzzle_input)
-
     puts "\n"
 
     puts "### Part 2 Solution ###"
     puts get_part_two_solution(puzzle_input)
+    puts "\n"
 end

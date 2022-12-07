@@ -70,9 +70,9 @@ if __FILE__ == $0
 
     puts "### Part 1 Solution ###"
     puts get_duplicate_item_priority_values_sum(parsed_input)
-
     puts "\n"
 
     puts "### Part 2 Solution ###"
     puts get_common_item_priority_values_sum(parsed_input)
+    puts "\n"
 end
