@@ -11,19 +11,20 @@ def get_puzzle_input
 end
 
 
-# Given a {string}, finds the end of the first substring of length {n} + 1 composed entirely of
-#   unique characters
-def find_end_of_substring_with_distinct_characters(string, n)
+# Given a {string}, finds the index + 1 of the end of the first substring of length {length}
+#   composed entirely of unique characters
+def find_end_of_substring_with_unique_characters(string, length)
     most_recent_characters = []
+    number_of_characters_to_track = length - 1
     (0...string.length).each do |i|
-        if most_recent_characters.length < n
+        if most_recent_characters.length < number_of_characters_to_track
             most_recent_characters.append(string[i])
         else
             if most_recent_characters.include?(string[i]) || most_recent_characters.uniq.length != most_recent_characters.length
                 most_recent_characters.shift
                 most_recent_characters.append(string[i])
             else
-                return i
+                return i + 1
             end
         end
     end
@@ -32,13 +33,13 @@ end
 
 # Finds the index + 1 of the last character of the start-of-packet marker (the solution to Part 1)
 def find_part_one_solution(puzzle_input)
-    return find_end_of_substring_with_distinct_characters(puzzle_input, 3) + 1
+    return find_end_of_substring_with_unique_characters(puzzle_input, 4)
 end
 
 
 # Finds the index + 1 of the last character of the start-of-message marker (the solution to Part 2)
 def find_part_two_solution(puzzle_input)
-    return find_end_of_substring_with_distinct_characters(puzzle_input, 13) + 1
+    return find_end_of_substring_with_unique_characters(puzzle_input, 14)
 end
 
 
