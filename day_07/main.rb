@@ -7,6 +7,8 @@
 
 # Define constants
 ONE_HUNDRED_THOUSAND = 100000
+TOTAL_DISK_SPACE = 70000000
+UNUSED_DISK_SPACE_REQUIRED_FOR_UPDATE = 30000000
 
 
 # A class representing a directory in the filesystem described in the puzzle
@@ -101,6 +103,31 @@ def find_part_one_solution(dir)
 end
 
 
+# Finds the directories that could be deleted to make enough room for the update
+def find_dirs_to_maybe_delete(dir, needed_disk_space)
+    result = Array.new
+    if dir.size >= needed_disk_space
+        result.append(dir.size)
+    end
+    dir.subdirs.each do |subdir|
+        result.concat(find_dirs_to_maybe_delete(subdir, needed_disk_space))
+    end
+    return result
+end
+
+
+# Finds the minimum amount of disk space that needs to be deleted to perform the update
+def find_needed_disk_space(root_dir_size)
+    return UNUSED_DISK_SPACE_REQUIRED_FOR_UPDATE - (TOTAL_DISK_SPACE - root_dir_size)
+end
+
+
+# Finds the smallest directory that can be deleted to make enough room for the update
+def find_part_two_solution(root_dir)
+    return find_dirs_to_maybe_delete(root_dir, find_needed_disk_space(root_dir.size)).min
+end
+
+
 # Do the thing
 if __FILE__ == $0
     puts "### Advent of Code 2022, Day 07 ###"
@@ -114,6 +141,6 @@ if __FILE__ == $0
     puts "\n"
 
     puts "### Part 2 Solution ###"
-    puts "TODO"
+    puts find_part_two_solution(root_dir)
     puts "\n"
 end
