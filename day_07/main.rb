@@ -72,13 +72,11 @@ def get_root_dir
     working_dir = root_dir
     File.read("#{__dir__}/input.txt").split("\n") do |line|
         tokens = line.split(" ")
-        if tokens[0] == "$"
-            if tokens[1] == "cd" && tokens[2] != "/"
-                if tokens[2] == ".."
-                    working_dir = working_dir.parent
-                else
-                    working_dir = working_dir.find_subdir_from_name(tokens[2])
-                end
+        if tokens[0] == "$" && tokens[1] == "cd" && tokens[2] != "/"
+            if tokens[2] == ".."
+                working_dir = working_dir.parent
+            else
+                working_dir = working_dir.find_subdir_from_name(tokens[2])
             end
         elsif tokens[0] == "dir"
             working_dir.add_subdir(Dir.new(tokens[1], working_dir))
@@ -90,7 +88,7 @@ def get_root_dir
 end
 
 
-# Finds the sum of the directories that are less than or equal to 100,000 in size
+# Finds the sum of the sizes of the directories with a total size less than or equal to 100,000
 def find_part_one_solution(dir)
     sum = 0
     if dir.name != "/" && dir.size <= ONE_HUNDRED_THOUSAND
