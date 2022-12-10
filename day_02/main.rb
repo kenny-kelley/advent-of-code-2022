@@ -5,6 +5,15 @@
 # Date: 2022-12-02
 
 
+# Declare constants
+ROCK_SCORE = 1
+PAPER_SCORE = 2
+SCISSORS_SCORE = 3
+LOSS_SCORE = 0
+DRAW_SCORE = 3
+WIN_SCORE = 6
+
+
 # Get the input parsed into an Nx2 matrix
 def get_parsed_input()
     lines = File.read("#{__dir__}/input.txt").split("\n")
@@ -16,51 +25,15 @@ def get_parsed_input()
 end
 
 
-# Get the score corresponding to choosing Rock
-def get_rock_score
-    return 1
-end
-
-
-# Get the score corresponding to choosing Paper
-def get_paper_score
-    return 2
-end
-
-
-# Get the score corresponding to choosing Scissors
-def get_scissors_score
-    return 3
-end
-
-
-# Get the score corresponding to a Loss
-def get_loss_score
-    return 0
-end
-
-
-# Get the score corresponding to a Draw
-def get_draw_score
-    return 3
-end
-
-
-# Get the score corresponding to a Win
-def get_win_score
-    return 6
-end
-
-
 # Get the score for my choice (according to Part 1's rules)
 def get_choice_score_part_one(choice)
     case choice
     when "X" # Rock
-        return get_rock_score
+        return ROCK_SCORE
     when "Y" # Paper
-        return get_paper_score
+        return PAPER_SCORE
     when "Z" # Scissors
-        return get_scissors_score
+        return SCISSORS_SCORE
     end
 end
 
@@ -71,29 +44,29 @@ def get_outcome_score_part_one(round_tuple)
     when "A" # Rock
         case round_tuple[1] # My choice
         when "X" # Rock
-            return get_draw_score
+            return DRAW_SCORE
         when "Y" # Paper
-            return get_win_score
+            return WIN_SCORE
         when "Z" # Scissors
-            return get_loss_score
+            return LOSS_SCORE
         end
     when "B" # Paper
         case round_tuple[1] # My choice
         when "X" # Rock
-            return get_loss_score
+            return LOSS_SCORE
         when "Y" # Paper
-            return get_draw_score
+            return DRAW_SCORE
         when "Z" # Scissors
-            return get_win_score
+            return WIN_SCORE
         end
     when "C" # Scissors
         case round_tuple[1] # My choice
         when "X" # Rock
-            return get_win_score
+            return WIN_SCORE
         when "Y" # Paper
-            return get_loss_score
+            return LOSS_SCORE
         when "Z" # Scissors
-            return get_draw_score
+            return DRAW_SCORE
         end
     end
 end
@@ -121,29 +94,29 @@ def get_choice_score_part_two(round_tuple)
     when "A" # Rock
         case round_tuple[1] # Round outcome
         when "X" # Loss
-            return get_scissors_score
+            return SCISSORS_SCORE
         when "Y" # Draw
-            return get_rock_score
+            return ROCK_SCORE
         when "Z" # Win
-            return get_paper_score
+            return PAPER_SCORE
         end
     when "B" # Paper
         case round_tuple[1] # Round outcome
         when "X" # Loss
-            return get_rock_score
+            return ROCK_SCORE
         when "Y" # Draw
-            return get_paper_score
+            return PAPER_SCORE
         when "Z" # Win
-            return get_scissors_score
+            return SCISSORS_SCORE
         end
     when "C" # Scissors
         case round_tuple[1] # Round outcome
         when "X" # Loss
-            return get_paper_score
+            return PAPER_SCORE
         when "Y" # Draw
-            return get_scissors_score
+            return SCISSORS_SCORE
         when "Z" # Win
-            return get_rock_score
+            return ROCK_SCORE
         end
     end
 end
@@ -153,11 +126,11 @@ end
 def get_outcome_score_part_two(outcome)
     case outcome
     when "X" # Loss
-        return get_loss_score
+        return LOSS_SCORE
     when "Y" # Draw
-        return get_draw_score
+        return DRAW_SCORE
     when "Z" # Win
-        return get_win_score
+        return WIN_SCORE
     end
 end
 
