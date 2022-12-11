@@ -5,7 +5,7 @@
 # Date: 2022-12-10
 
 
-# Import from Standard Library
+# Import the library that provides {Set}
 require "set"
 
 
