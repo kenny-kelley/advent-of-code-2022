@@ -127,17 +127,14 @@ class PartTwo
     end
 
     def calculate_scenic_score(m, n)
-        left_score = self.calculate_left_score(m, n)
-        right_score = self.calculate_right_score(m, n)
-        up_score = self.calculate_up_score(m, n)
-        down_score = self.calculate_down_score(m, n)
-        @scenic_scores.add(left_score * right_score * up_score * down_score)
+        return self.calculate_left_score(m, n) * self.calculate_right_score(m, n) \
+            * self.calculate_up_score(m, n) * self.calculate_down_score(m, n)
     end
 
     def calculate_scenic_scores
         (0...@tree_grid.length).each do |m|
             (0...@tree_grid[m].length).each do |n|
-                self.calculate_scenic_score(m, n)
+                @scenic_scores.add(self.calculate_scenic_score(m, n))
             end
         end
     end
@@ -160,7 +157,7 @@ def find_part_one_solution(tree_grid)
 end
 
 
-# Finds the highest scenic score possible for any tree
+# Finds the highest scenic score of any tree in the grid
 def find_part_two_solution(tree_grid)
     return PartTwo.new(tree_grid).scenic_scores.max
 end
