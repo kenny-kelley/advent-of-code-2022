@@ -9,12 +9,14 @@
 require "set"
 
 
-# A class that represents the puzzle state
-class PuzzleState
+# A class that represents the puzzle state for Part 1
+class PartOne
     def initialize(tree_grid)
         @tree_grid = tree_grid
         @observed_trees = Set.new
         @tallest_tree_in_view = nil
+        self.look_from_left_and_right
+        self.look_from_and_top_and_bottom
     end
 
     attr_reader :observed_trees
@@ -67,11 +69,6 @@ class PuzzleState
             end
         end
     end
-
-    def look_from_all_sides
-        self.look_from_left_and_right
-        self.look_from_and_top_and_bottom
-    end
 end
 
 
@@ -87,9 +84,7 @@ end
 
 # Finds the number of trees visible from outside the grid
 def find_part_one_solution(tree_grid)
-    puzzle_state = PuzzleState.new(tree_grid)
-    puzzle_state.look_from_all_sides
-    return puzzle_state.observed_trees.size
+    return PartOne.new(tree_grid).observed_trees.size
 end
 
 
