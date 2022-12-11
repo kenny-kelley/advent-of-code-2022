@@ -72,6 +72,78 @@ class PartOne
 end
 
 
+# A class that represents the puzzle state for Part 2
+class PartTwo
+    def initialize(tree_grid)
+        @tree_grid = tree_grid
+        @scenic_scores = Set.new
+        self.calculate_scenic_scores
+    end
+
+    attr_reader :scenic_scores
+
+    def calculate_left_score(m, n)
+        result = 0
+        (0...n).reverse_each do |i|
+            result += 1
+            if @tree_grid[m][i] >= @tree_grid[m][n]
+                break
+            end
+        end
+        return result
+    end
+
+    def calculate_right_score(m, n)
+        result = 0
+        ((n + 1)...@tree_grid[m].length).each do |i|
+            result += 1
+            if @tree_grid[m][i] >= @tree_grid[m][n]
+                break
+            end
+        end
+        return result
+    end
+
+    def calculate_up_score(m, n)
+        result = 0
+        (0...m).reverse_each do |i|
+            result += 1
+            if @tree_grid[i][n] >= @tree_grid[m][n]
+                break
+            end
+        end
+        return result
+    end
+
+    def calculate_down_score(m, n)
+        result = 0
+        ((m + 1)...@tree_grid.length).each do |i|
+            result += 1
+            if @tree_grid[i][n] >= @tree_grid[m][n]
+                break
+            end
+        end
+        return result
+    end
+
+    def calculate_scenic_score(m, n)
+        left_score = self.calculate_left_score(m, n)
+        right_score = self.calculate_right_score(m, n)
+        up_score = self.calculate_up_score(m, n)
+        down_score = self.calculate_down_score(m, n)
+        @scenic_scores.add(left_score * right_score * up_score * down_score)
+    end
+
+    def calculate_scenic_scores
+        (0...@tree_grid.length).each do |m|
+            (0...@tree_grid[m].length).each do |n|
+                self.calculate_scenic_score(m, n)
+            end
+        end
+    end
+end
+
+
 # Returns the puzzle input, which is an MxN matrix of integers (meaning M rows and N columns)
 def get_tree_grid
     result = Array.new
@@ -88,6 +160,12 @@ def find_part_one_solution(tree_grid)
 end
 
 
+# Finds the highest scenic score possible for any tree
+def find_part_two_solution(tree_grid)
+    return PartTwo.new(tree_grid).scenic_scores.max
+end
+
+
 # Do the thing
 if __FILE__ == $0
     puts "### Advent of Code 2022, Day 08 ###"
@@ -100,6 +178,6 @@ if __FILE__ == $0
     puts "\n"
 
     puts "### Part 2 Solution ###"
-    puts "TODO"
+    puts find_part_two_solution(tree_grid)
     puts "\n"
 end
